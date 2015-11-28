@@ -2991,31 +2991,32 @@ var Raid = (function () {
     Raid.prototype.startTestDamage = function () {
         var tank = this.players[2];
         var createSomeRandomDamage = setInterval(randomDamage.bind(this), 3600);
-        var createSomeRandomDamage2 = setInterval(randomDamage2.bind(this), 1160);
+        var createSomeRandomDamage2 = setInterval(randomDamage2.bind(this), 1560);
         var createSomeRandomDamage3 = setInterval(applyAbsorb.bind(this), 1960);
         var testAoeDamage = setInterval(aoeDamage.bind(this), 1960);
         var testAoeHealing = setInterval(aoeHealing.bind(this), 2500);
         function randomDamage2() {
-            tank.recive_damage({ amount: game.rnd.between(11, 28900) });
+            var random = game.rnd.between(0, this.players.length);
+            this.players[random].recive_damage({ amount: game.rnd.between(100000, 250000) });
         }
         function randomDamage() {
             tank.recive_damage({ amount: game.rnd.between(15555, 338900) });
         }
         function aoeDamage() {
             var i = game.rnd.between(0, this.players.length);
-            for (var i = 0; i < this.players.length; i++) {
+            for (; i < this.players.length; i++) {
                 var player = this.players[i];
-                player.recive_damage({ amount: game.rnd.between(35555, 98900) });
+                player.recive_damage({ amount: game.rnd.between(25555, 68900) });
             }
         }
         function aoeHealing() {
             for (var i = 0; i < this.players.length; i++) {
                 var player = this.players[i];
-                player.setHealth(tank.getCurrentHealth() + game.rnd.between(10000, 58900));
+                player.setHealth(player.getCurrentHealth() + game.rnd.between(15000, 78900));
             }
         }
         function applyAbsorb() {
-            tank.setHealth(tank.getCurrentHealth() + game.rnd.between(20000, 88900));
+            tank.setHealth(tank.getCurrentHealth() + game.rnd.between(10000, 38900));
         }
     };
     return Raid;
